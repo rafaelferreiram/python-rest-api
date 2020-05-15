@@ -24,15 +24,4 @@ def add_star():
   userResponseDTO = UserResponseDTO.formatDTO(userResponse)
   return userResponseDTO
 
-@app.route("/insert", methods=["GET"])
-def defaultInsertion():
-  pythonDb = mongo.db.python
-  name = "Test"
-  distance = "1km"
-  star_id = pythonDb.insert({'name': name, 'distance': distance})
-  new_star = pythonDb.find_one({'_id': star_id })
-  print(new_star)
-  output = {'name' : new_star['name'], 'distance' : new_star['distance']}
-  return jsonify({'result' : output})
-
 app.run(debug=True)
