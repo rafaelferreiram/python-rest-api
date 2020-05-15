@@ -1,8 +1,11 @@
 from flask import Flask, jsonify
 from flask_pymongo import PyMongo
+from config.mongoDB import MongoConfig
+
 app = Flask(__name__)
-app.config["MONGO_URI"] = "mongodb+srv://admin:pwdadmin@dynamic-dug18.mongodb.net/py-db?retryWrites=true&w=majority"
-app.config["MONGO_DBNAME"] = "python"
+app.config["MONGO_URI"] = MongoConfig.mongoURI()
+app.config["MONGO_DBNAME"] = MongoConfig.mongoDataBase()
+
 mongo = PyMongo(app)
 
 @app.route("/", methods=["GET"])
@@ -12,7 +15,7 @@ def home():
 @app.route("/insert", methods=["GET"])
 def add_star():
   pythonDb = mongo.db.python
-  name = "Rafael"
+  name = "Test"
   distance = "1km"
   star_id = pythonDb.insert({'name': name, 'distance': distance})
   new_star = pythonDb.find_one({'_id': star_id })
