@@ -1,3 +1,9 @@
 #Python API
-Quick REST API using Python and MongoDB to save data.
+REST API on Python saving data into MongoDB Cluste.
+
+Quick project based on clean Software Architecture and Clean Code principles.
+ 
+## Technologies
+- Python 3
+- MongoDB 
 
