@@ -13,7 +13,7 @@ mongo = PyMongo(app)
 def home():
     return jsonify({"Status":"Server Works!"})
 
-@app.route("/user/cad", methods=["GET"])
+@app.route("/api/v1/user/cad", methods=["GET"])
 def add_star():
   userModel = UserModel("Rafael","Ferreira","22","rafael@ferreira.dev")
   pythonDb = mongo.db.python
