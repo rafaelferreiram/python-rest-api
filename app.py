@@ -24,4 +24,11 @@ def insert_user():
   userResponseDTO = UserResponseDTO.formatDTO(userResponse)
   return userResponseDTO
 
+@app.route("/api/v1/user/name", methods=["GET"])
+def get_user_by_name(name):
+  pythonDb = mongo.db.python
+  userResponse = pythonDb.find_one({'firstName': name})
+  userResponseDTO = UserResponseDTO.formatDTO(userResponse)
+  return userResponseDTO
+
 app.run(debug=True)
