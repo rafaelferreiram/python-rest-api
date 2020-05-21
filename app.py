@@ -14,7 +14,7 @@ def home():
     return jsonify({"Status":"Server Works!"})
 
 @app.route("/api/v1/user/cad", methods=["GET"])
-def add_star():
+def insert_user():
   userModel = UserModel("Rafael","Ferreira","22","rafael@ferreira.dev")
   pythonDb = mongo.db.python
   valuestr = json.dumps(userModel, default=lambda x: x.__dict__)
