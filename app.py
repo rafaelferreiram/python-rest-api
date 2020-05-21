@@ -3,6 +3,7 @@ from flask_pymongo import PyMongo
 from config.mongoDB import MongoConfig
 from models.UserModel import UserModel
 from dto.response.UserResponseDTO import UserResponseDTO
+
 app = Flask(__name__)
 app.config["MONGO_URI"] = MongoConfig.mongoURI()
 app.config["MONGO_DBNAME"] = MongoConfig.mongoDataBase()
