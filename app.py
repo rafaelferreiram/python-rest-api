@@ -29,7 +29,6 @@ def insert_user_post():
 def get_user_by_name(name):
   pythonDb = mongo.db.python
   userResponse = pythonDb.find_one({'firstName': name})
-  print(userResponse)
   userResponseDTO = UserResponseDTO.formatDTO(userResponse)
   return userResponseDTO
 
