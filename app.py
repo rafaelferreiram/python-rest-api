@@ -1,4 +1,4 @@
-from flask import Flask, jsonify , json
+from flask import Flask, jsonify , json , request
 from flask_pymongo import PyMongo
 from config.mongoDB import MongoConfig
 from models.UserModel import UserModel
@@ -17,6 +17,17 @@ def home():
 @app.route("/api/v1/user/cad", methods=["GET"])
 def insert_user():
   userModel = UserModel("Teste","123","22","rafael@ferreira.dev")
+  pythonDb = mongo.db.python
+  valuestr = json.dumps(userModel, default=lambda x: x.__dict__)
+  value = json.loads(valuestr)
+  userId = pythonDb.insert(value)
+  userResponse = pythonDb.find_one({'_id': userId })
+  userResponseDTO = UserResponseDTO.formatDTO(userResponse)
+  return userResponseDTO
+
+@app.route("/api/v1/user/cad", methods=["POST"])
+def insert_user_post():
+  userModel = UserModel(request.json.get("firstName"),request.json.get("lastName"),request.json.get("age"),request.json.get("email"))
   pythonDb = mongo.db.python
   valuestr = json.dumps(userModel, default=lambda x: x.__dict__)
   value = json.loads(valuestr)
