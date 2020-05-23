@@ -16,7 +16,7 @@ def home():
 
 @app.route("/api/v1/user/cad", methods=["GET"])
 def insert_user():
-  userModel = UserModel("Rafael","Ferreira","22","rafael@ferreira.dev")
+  userModel = UserModel("Teste","123","22","rafael@ferreira.dev")
   pythonDb = mongo.db.python
   valuestr = json.dumps(userModel, default=lambda x: x.__dict__)
   value = json.loads(valuestr)
@@ -25,10 +25,11 @@ def insert_user():
   userResponseDTO = UserResponseDTO.formatDTO(userResponse)
   return userResponseDTO
 
-@app.route("/api/v1/user/name", methods=["GET"])
+@app.route("/api/v1/user/name/<string:name>", methods=["GET"])
 def get_user_by_name(name):
   pythonDb = mongo.db.python
   userResponse = pythonDb.find_one({'firstName': name})
+  print(userResponse)
   userResponseDTO = UserResponseDTO.formatDTO(userResponse)
   return userResponseDTO
 
