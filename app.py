@@ -20,8 +20,8 @@ def insert_user_post():
   returnMsg = ""
   try:
     userModel = UserModel(request.json.get("firstName"),request.json.get("lastName"),request.json.get("age"),request.json.get("email"))
-    UserService.create_user(userModel,mongo)
-    returnMsg = "User created successfully"
+    userId = UserService.create_user(userModel,mongo)
+    returnMsg = "User created successfully. userId: "+userId
   except:
     returnMsg = "Error creating user"
   #userResponse = pythonDb.find_one({'_id': userId })

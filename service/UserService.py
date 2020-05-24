@@ -7,3 +7,4 @@ class UserService():
         valuestr = json.dumps(user, default=lambda x: x.__dict__)
         value = json.loads(valuestr)
         userId = pythonDb.insert(value)
+        return userId
