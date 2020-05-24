@@ -32,4 +32,11 @@ def get_user_by_name(name):
   userResponseDTO = UserResponseDTO.formatDTO(userResponse)
   return userResponseDTO
 
+@app.route("/api/v1/user/name/<string:name>", methods=["DELETE"])
+def delete_user(name):
+  return "TODO Delete"
+
+def update_user(user):
+  return "TODO Update"
+
 app.run(debug=True)
