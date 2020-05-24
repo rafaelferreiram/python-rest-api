@@ -3,6 +3,7 @@ from flask_pymongo import PyMongo
 from config.mongoDB import MongoConfig
 from models.UserModel import UserModel
 from dto.response.UserResponseDTO import UserResponseDTO
+from service.UserService import UserService
 
 app = Flask(__name__)
 app.config["MONGO_URI"] = MongoConfig.mongoURI()
@@ -16,14 +17,16 @@ def home():
 
 @app.route("/api/v1/user/cad", methods=["POST"])
 def insert_user_post():
-  userModel = UserModel(request.json.get("firstName"),request.json.get("lastName"),request.json.get("age"),request.json.get("email"))
-  pythonDb = mongo.db.python
-  valuestr = json.dumps(userModel, default=lambda x: x.__dict__)
-  value = json.loads(valuestr)
-  userId = pythonDb.insert(value)
-  userResponse = pythonDb.find_one({'_id': userId })
-  userResponseDTO = UserResponseDTO.formatDTO(userResponse)
-  return userResponseDTO
+  returnMsg = ""
+  try:
+    userModel = UserModel(request.json.get("firstName"),request.json.get("lastName"),request.json.get("age"),request.json.get("email"))
+    UserService.create_user(userModel,mongo)
+    returnMsg = "User created successfully"
+  except:
+    returnMsg = "Error creating user"
+  #userResponse = pythonDb.find_one({'_id': userId })
+  #userResponseDTO = UserResponseDTO.formatDTO(userResponse)
+  return returnMsg
 
 @app.route("/api/v1/user/name/<string:name>", methods=["GET"])
 def get_user_by_name(name):
