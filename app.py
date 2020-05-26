@@ -28,10 +28,15 @@ def insert_user_post():
 
 @app.route("/api/v1/user/name/<string:name>", methods=["GET"])
 def get_user_by_name(name):
-  pythonDb = mongo.db.python
-  userResponse = pythonDb.find_one({'firstName': name})
-  userResponseDTO = UserResponseDTO.formatDTO(userResponse)
-  return userResponseDTO
+  returnMsg = ""
+  try:
+    pythonDb = mongo.db.python
+    userResponse = pythonDb.find_one({'firstName': name})
+    userResponseDTO = UserResponseDTO.formatDTO(userResponse)
+    returnMsg = userResponseDTO
+  except:
+    returnMsg = "Error getting User"
+  return returnMsg
 
 def get_user_by_id(id):
   #userResponse = pythonDb.find_one({'_id': userId })
