@@ -24,8 +24,6 @@ def insert_user_post():
     returnMsg = "User created successfully. userId: "+userId
   except:
     returnMsg = "Error creating user"
-  #userResponse = pythonDb.find_one({'_id': userId })
-  #userResponseDTO = UserResponseDTO.formatDTO(userResponse)
   return returnMsg
 
 @app.route("/api/v1/user/name/<string:name>", methods=["GET"])
@@ -34,6 +32,10 @@ def get_user_by_name(name):
   userResponse = pythonDb.find_one({'firstName': name})
   userResponseDTO = UserResponseDTO.formatDTO(userResponse)
   return userResponseDTO
+
+def get_user_by_id(id):
+  #userResponse = pythonDb.find_one({'_id': userId })
+  #userResponseDTO = UserResponseDTO.formatDTO(userResponse)
 
 @app.route("/api/v1/user/name/<string:name>", methods=["DELETE"])
 def delete_user(name):
