@@ -42,6 +42,7 @@ def get_user_by_id(id):
   #userResponse = pythonDb.find_one({'_id': userId })
   #userResponseDTO = UserResponseDTO.formatDTO(userResponse)
   return "TODO GetById"
+
 @app.route("/api/v1/user/name/<string:name>", methods=["DELETE"])
 def delete_user(name):
   return "TODO Delete"
